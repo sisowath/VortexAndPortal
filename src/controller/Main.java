@@ -7,6 +7,8 @@ import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -143,10 +145,25 @@ public class Main {
                                 fenetreJeu.setLocationRelativeTo( null );
                             }
                         });
+                        JMenuItem miRoulerDe = new JMenuItem("Rouler dé");
+                        int max = Integer.parseInt( JOptionPane.showInputDialog(null, "Veuillez saisir le nombre de faces : ", "Question", JOptionPane.QUESTION_MESSAGE) );
+                        int min = 1;
+                        miRoulerDe.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {
+                                Random rand = new Random();
+                                int faceDebout = rand.nextInt((max - min) + 1) + min;
+                                JOptionPane.showMessageDialog(null, "Le dé est tombé sur " + faceDebout, "Info", JOptionPane.INFORMATION_MESSAGE);
+                            }                            
+                        });
                     mJeu.add( miDemarrer );
+                    mJeu.add( miRoulerDe );
                 barreDesMenus.add(mFichier);
                 barreDesMenus.add( mJeu );
                 fenetrePrincipal.setJMenuBar( barreDesMenus );
+                
+                JButton btnTestImage = new JButton("Test", new ImageIcon("./images/Koala.jpg") );
+                fenetrePrincipal.add( btnTestImage, BorderLayout.SOUTH);
             }            
         });
     }
